@@ -24,19 +24,4 @@ public class KafkaService {
     public void send(String message){
         kafkaTemplate.send(kafkaProperties.getTopic().getX(), message);
     }
-
-
-    /*
-    *   @KafkaListener(topics = "euro-message-template-email", groupId = "dev")
-    public void consumeEmailEvents(PostWithHtmlTemplateEvent emailEvent) {
-        emailService.sendEmailWithTemplate(emailEvent);
-    }
-    *
-    *
-    *     private final KafkaTemplate<String, Object> kafkaTemplate;
-    private final KafkaProperties kafkaProperties;
-
-    public void send(PostWithHtmlTemplateEvent postEmailEvent) {
-        kafkaTemplate.send(kafkaProperties.getTopic().getEuroMessage(), postEmailEvent);
-    }*/
 }
