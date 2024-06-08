@@ -1,0 +1,6 @@
+kafka:
+  address: localhost:29092
+  topic:
+    x: x
+    y: y
+    z: z
