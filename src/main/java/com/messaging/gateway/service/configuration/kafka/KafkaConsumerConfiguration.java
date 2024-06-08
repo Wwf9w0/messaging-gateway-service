@@ -42,24 +42,4 @@ public class KafkaConsumerConfiguration {
         props.put(JsonDeserializer.TRUSTED_PACKAGES, "*");
         return props;
     }
-
-    @Bean
-    public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String, String>> iddaaKafkaListenerContainerFactory() {
-        ConcurrentKafkaListenerContainerFactory<String, String> factory =
-                new ConcurrentKafkaListenerContainerFactory<>();
-        factory.setConsumerFactory(new DefaultKafkaConsumerFactory<>(iddaaConsumerConfigs()));
-        return factory;
-    }
-
-    @Bean
-    public Map<String, Object> iddaaConsumerConfigs() {
-        Map<String, Object> props = new HashMap<>();
-        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaProperties.getAddress());
-        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-        props.put(ConsumerConfig.GROUP_ID_CONFIG, kafkaProperties.getGroupId());
-        props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "latest");
-        props.put(JsonDeserializer.TRUSTED_PACKAGES, "*");
-        return props;
-    }
 }
