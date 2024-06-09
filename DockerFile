@@ -1,0 +1,4 @@
+FROM openjdk:8
+ADD target/messaging-gateway-service-0.0.1-SNAPSHOT.jar messaging-gateway-service-0.0.1-SNAPSHOT.jar
+EXPOSE 8088
+ENTRYPOINT ["java", "-jar", "messaging-gateway-service-0.0.1-SNAPSHOT.jar"]

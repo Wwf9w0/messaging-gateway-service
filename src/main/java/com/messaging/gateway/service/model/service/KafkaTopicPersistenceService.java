@@ -17,14 +17,12 @@ public class KafkaTopicPersistenceService {
     private final KafkaTopicRepository kafkaTopicRepository;
 
     public void saveKafkaTopic(KafkaCreateTopicRequest request) {
-
         KafkaTopicEntity kafkaTopicEntity = KafkaTopicEntity.builder()
                 .userId(request.getUserId())
                 .topicName(request.getTopicName())
                 .build();
         KafkaTopicEntity save = kafkaTopicRepository.save(kafkaTopicEntity);
         log.info("Kafka topic is created for userId : {}", save.getUserId());
-
     }
 
     public List<KafkaTopicEntity> getAllKafkaTopics(){

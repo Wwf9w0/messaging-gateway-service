@@ -21,10 +21,15 @@ public class KafkaService {
     private final KafkaTemplate<String, Object> kafkaTemplate;
     private final KafkaProperties kafkaProperties;
 
+    private final KafkaConsumerService consumerService;
 
-    @KafkaListener(topics = "x", groupId = "group-1")
-    public void consumer(String message){
-        log.info(message);
+    private final KafkaProducerService kafkaProducerService;
+
+
+    @KafkaListener(topics = "x", groupId = "group-2")
+    public void consumer(KafkaProducerRequest producerRequest){
+        log.info(" event : {}", producerRequest);
+        consumerService.consumerEvent(producerRequest);
     }
 
     public void send(String message){
@@ -32,7 +37,9 @@ public class KafkaService {
     }
 
     public void produceObject(KafkaProducerRequest kafkaProducerRequest) {
-        kafkaTemplate.send(kafkaProperties.getTopic().getX(), kafkaProducerRequest);
+        kafkaProducerService.producerService(kafkaProducerRequest);
+        //TODO filter event for user in the kafka event list
+        // return the event list for user
     }
 
     public void createTopic(KafkaCreateTopicRequest createTopicRequest) {
