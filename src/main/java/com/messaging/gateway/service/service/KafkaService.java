@@ -25,6 +25,8 @@ public class KafkaService {
 
     private final KafkaProducerService kafkaProducerService;
 
+    private final KafkaMongoService kafkaMongoService;
+
 
     @KafkaListener(topics = "x", groupId = "group-2")
     public void consumer(KafkaProducerRequest producerRequest){
@@ -40,6 +42,13 @@ public class KafkaService {
         kafkaProducerService.producerService(kafkaProducerRequest);
         //TODO filter event for user in the kafka event list
         // return the event list for user
+        //TODO save data to mongo
+        kafkaMongoService.saveEventOnMongo(kafkaProducerRequest);
+    }
+
+    public List<String> getEventFromMongo(Long id){
+        // TODO return the data
+        return kafkaMongoService.returnDataFromMongo();
     }
 
     public void createTopic(KafkaCreateTopicRequest createTopicRequest) {
