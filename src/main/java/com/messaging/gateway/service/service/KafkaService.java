@@ -27,6 +27,8 @@ public class KafkaService {
 
     private final KafkaMongoService kafkaMongoService;
 
+    private final RedisService redisService;
+
 
     @KafkaListener(topics = "x", groupId = "group-2")
     public void consumer(KafkaProducerRequest producerRequest){
@@ -44,6 +46,8 @@ public class KafkaService {
         // return the event list for user
         //TODO save data to mongo
         kafkaMongoService.saveEventOnMongo(kafkaProducerRequest);
+        //TODO set data of cache
+        redisService.saveDataRedis();
     }
 
     public List<String> getEventFromMongo(Long id){
@@ -51,6 +55,10 @@ public class KafkaService {
         return kafkaMongoService.returnDataFromMongo();
     }
 
+    public String getDataFromCache(String prefixName){
+        //TODO get Data from cache
+        return redisService.getDataFromCache(prefixName);
+    }
     public void createTopic(KafkaCreateTopicRequest createTopicRequest) {
     }
 
